@@ -1,0 +1,8 @@
+docker:
+  host: "${DOCKER_IP:localhost}"
+
+spring:
+  datasource:
+    url: "jdbc:postgresql://${docker.host}:5432/postgres?currentSchema=hello_world"
+    username: postgres
+    password: test123456

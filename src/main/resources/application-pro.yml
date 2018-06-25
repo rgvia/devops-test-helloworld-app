@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    url: "jdbc:postgresql://helloworld.database.lan:5432/postgres?currentSchema=hello_world"
+    username: postgres
+    password: test123456
