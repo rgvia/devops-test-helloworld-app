@@ -5,7 +5,8 @@ This folder contains the sample code for a Spring boot application used for the 
 [ci-badge]: https://storage.googleapis.com/nodejs-getting-started-tests-badges/1-tests.svg
 
 # Dependencies
-This Application needs a PostgresSQL database. Version 9.6 or higher is required. For development environment a docker-compose is provided within this project.
+* `PostgreSQL`: Version 9.6 or higher is required. For development environment a docker-compose is provided within this project.
+* `Java8`
 
 # Run application
 
@@ -20,3 +21,4 @@ This Application needs a PostgresSQL database. Version 9.6 or higher is required
 1. Build the application: `./gradlew build`. This command will generated the following jar: `build/libs/helloworld-0.0.1-SNAPSHOT.jar`
 2. Run the application: `java -jar helloworld-0.0.1-SNAPSHOT.jar --spring.profiles.active=pro`
 
+Note:  In deploy time a script initializing the Database will be executed, this script could take more than 3 minutes.
