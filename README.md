@@ -5,7 +5,7 @@ This folder contains the sample code for a Spring boot application used for the 
 [ci-badge]: https://storage.googleapis.com/nodejs-getting-started-tests-badges/1-tests.svg
 
 # Dependencies
-This Application needs a PostgresSQL database. Version 9.6.0 or higher is required. For development environment a docker-compose is provided within this project.
+This Application needs a PostgresSQL database. Version 9.6 or higher is required. For development environment a docker-compose is provided within this project.
 
 # Run application
 
