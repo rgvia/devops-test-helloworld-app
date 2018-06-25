@@ -6,7 +6,7 @@ This folder contains the sample code for a Spring boot application used for the 
 
 # Dependencies
 * `PostgreSQL`: Version 9.6 or higher is required. For development environment a docker-compose is provided within this project.
-* `Java8`
+* `Java 8`
 
 # Run application
 
