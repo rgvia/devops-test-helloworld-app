@@ -50,8 +50,8 @@ This application provides a REST API for get users info.
 ```
 
 ## Get Users by type
-Gets the users of the given type. Possible values of type are between 1 and 10.
-* **URL:**`/users?userType=userTypeId` 
+Gets the users of the given type. 
+* **URL:**`/users?userType={userTypeId}` 
 * **Method:**`GET`
 * **Response:**  
 ```json
@@ -61,6 +61,7 @@ Gets the users of the given type. Possible values of type are between 1 and 10.
   {"id":38,"name":"user38","surname":"surname38","type":6}
 ]
 ```
+Possible values of `userType` are between `1` and `10`.
 
 ### Note: 
 Application and access logs will be generated in the following folder: `/var/log/helloworld` 
