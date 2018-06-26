@@ -1,6 +1,7 @@
 buildscript {
 	ext {
 		springBootVersion = '2.0.3.RELEASE'
+		logbackVersion = '1.2.3'
 	}
 	repositories {
 		mavenCentral()
@@ -34,6 +35,13 @@ dependencies {
 	compile("javax.inject:javax.inject:1")
 	compile('org.flywaydb:flyway-core')
 	runtime('org.postgresql:postgresql')
+
+	// Logging
+	compile("ch.qos.logback:logback-classic:${logbackVersion}")
+	compile("ch.qos.logback:logback-core:${logbackVersion}")
+	compile("ch.qos.logback:logback-access:${logbackVersion}")
+	compile 'net.rakugakibox.spring.boot:logback-access-spring-boot-starter:2.7.1'
+
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
