@@ -207,6 +207,7 @@ Resources:
         configSets:
           full_install:
             - install_cfn
+            - install_java8
         install_cfn:
           files:
             /etc/cfn/cfn-hup.conf:
@@ -256,6 +257,13 @@ Resources:
                 files:
                   - /etc/cfn/cfn-hup.conf
                   - /etc/cfn/hooks.d/cfn-auto-reloader.conf
+        install_java8:
+          packages:
+            yum:
+              java-1.8.0-openjdk: []
+          commands:
+            01_configure_java8:
+              command: /usr/sbin/alternatives --set java /usr/lib/jvm/jre-1.8.0-openjdk.x86_64/bin/java
     Properties:
       ImageId: !FindInMap 
         - AWSRegionArch2AMI
