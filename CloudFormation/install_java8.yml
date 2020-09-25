@@ -1,0 +1,116 @@
+Resources:
+  HelloWorld:
+    Type: AWS::EC2::Instance
+    Metadata:
+      'AWS::CloudFormation::Init':
+        configSets:
+          tools_install:
+            - install_cfn
+            - install_java8
+        install_cfn:
+          files:
+            /etc/cfn/cfn-hup.conf:
+              content: !Join 
+                - ''
+                - - |
+                    [main]
+                  - stack=
+                  - !Ref 'AWS::StackId'
+                  - |+
+
+                  - region=
+                  - !Ref 'AWS::Region'
+                  - |+
+
+              mode: '000400'
+              owner: root
+              group: root
+            /etc/cfn/hooks.d/cfn-auto-reloader.conf:
+              content: !Join 
+                - ''
+                - - |
+                    [cfn-auto-reloader-hook]
+                  - |
+                    triggers=post.update
+                  - >
+                    path=Resources.HelloWorld.Metadata.AWS::CloudFormation::Init
+                  - 'action=/opt/aws/bin/cfn-init -v '
+                  - '         --stack '
+                  - !Ref 'AWS::StackName'
+                  - '         --resource HelloWorld '
+                  - '         --configsets tools_install '
+                  - '         --region '
+                  - !Ref 'AWS::Region'
+                  - |+
+
+              mode: '000400'
+              owner: root
+              group: root
+          services:
+            sysvinit:
+              cfn-hup:
+                enabled: 'true'
+                ensureRunning: 'true'
+                files:
+                  - /etc/cfn/cfn-hup.conf
+                  - /etc/cfn/hooks.d/cfn-auto-reloader.conf
+        install_java8:
+          packages:
+            yum:
+              java-1.8.0-openjdk: []
+          commands:
+            01_configure_java8:
+              command: /usr/sbin/alternatives --set java /usr/lib/jvm/jre-1.8.0-openjdk.x86_64/bin/java
+    Properties:
+      InstanceType: t2.micro
+      ImageId: ami-04fcd96153cb57194
+      KeyName: aws-key1
+      SecurityGroups:
+        - !Ref HelloWorldSG
+      UserData: !Base64 
+        'Fn::Join':
+          - ''
+          - - |
+              #!/bin/bash -xe
+            - |
+              yum update -y aws-cfn-bootstrap
+            - '/opt/aws/bin/cfn-init -v '
+            - '         --stack '
+            - !Ref 'AWS::StackName'
+            - '         --resource HelloWorld '
+            - '         --configsets tools_install '
+            - '         --region '
+            - !Ref 'AWS::Region'
+            - |+
+
+            - '/opt/aws/bin/cfn-signal -e $? '
+            - '         --stack '
+            - !Ref 'AWS::StackName'
+            - '         --resource HelloWorld '
+            - '         --region '
+            - !Ref 'AWS::Region'
+            - |+
+
+  HelloWorldSG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: for the app nodes that allow ssh, http and docker ports
+      SecurityGroupIngress:
+      - CidrIp: 0.0.0.0/0
+        FromPort: 80
+        IpProtocol: tcp
+        ToPort: 80
+      - CidrIp: 0.0.0.0/0
+        FromPort: 22
+        IpProtocol: tcp
+        ToPort: 22
+
+  DatabaseInstance:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      DBName: "helloworld"
+      Engine: postgres
+      MasterUsername: postgres
+      MasterUserPassword: test123456
+      DBInstanceClass: db.t2.micro
+      AllocatedStorage: '5'
