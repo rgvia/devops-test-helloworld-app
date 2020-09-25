@@ -6,7 +6,9 @@ phases:
       - java -version
       - alternatives --set java /usr/lib/jvm/java-1.8.0-amazon-corretto.x86_64/jre/bin/java
       - java -version
+      - ls -lah /usr/lib/jvm
       - echo $JAVA_HOME
+      - echo $PATH
   build:
     commands:
       - echo Build started on `date`
