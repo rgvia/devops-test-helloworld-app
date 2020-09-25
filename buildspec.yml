@@ -8,6 +8,8 @@ phases:
       - java -version
       - ls -lah /usr/lib/jvm
       - echo $JAVA_HOME
+      - export JAVA_HOME=/usr/lib/jvm/java-1.8.0-amazon-corretto.x86_64
+      - echo $JAVA_HOME
       - echo $PATH
   build:
     commands:
