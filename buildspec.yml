@@ -3,8 +3,8 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
       - java -version
+      - alternatives --config java
       - echo $JAVA_HOME
   build:
     commands:
