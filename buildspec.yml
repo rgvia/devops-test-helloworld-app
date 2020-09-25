@@ -3,9 +3,9 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - echo Nothing to do in the pre_build phase...
+      - /usr/sbin/alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
       - java -version
-      - update-alternatives --config java
+      - echo $JAVA_HOME
   build:
     commands:
       - echo Build started on `date`
