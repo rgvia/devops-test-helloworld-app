@@ -4,7 +4,8 @@ phases:
   pre_build:
     commands:
       - java -version
-      - alternatives --config java
+      - alternatives --set java /usr/lib/jvm/java-1.8.0-amazon-corretto.x86_64/jre/bin/java
+      - java -version
       - echo $JAVA_HOME
   build:
     commands:
