@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: "jdbc:postgresql://${RDS_HOSTNAME}:${RDS_PORT}/${RDS_DBNAME}?currentSchema=hello_world"
+    url: "jdbc:postgresql://${RDS_HOSTNAME}:${RDS_PORT}/${RDS_DB_NAME}?currentSchema=hello_world"
     username: ${RDS_USERNAME}
     password: ${RDS_PASSWORD}
 
