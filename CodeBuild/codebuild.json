@@ -1,0 +1,64 @@
+{
+    "projects": [
+        {
+            "name": "helloworldapp",
+            "arn": "arn:aws:codebuild:us-east-2:647020915193:project/helloworldapp",
+            "source": {
+                "type": "GITHUB",
+                "location": "https://github.com/rgvia/devops-test-helloworld-app.git",
+                "gitCloneDepth": 1,
+                "gitSubmodulesConfig": {
+                    "fetchSubmodules": false
+                },
+                "buildspec": "CodeBuild/buildspec.yml",
+                "reportBuildStatus": false,
+                "insecureSsl": false
+            },
+            "secondarySources": [],
+            "secondarySourceVersions": [],
+            "artifacts": {
+                "type": "S3",
+                "location": "devops-test-helloworld-app-artifact-output",
+                "path": "",
+                "namespaceType": "NONE",
+                "name": "helloworldapp",
+                "packaging": "NONE",
+                "overrideArtifactName": false,
+                "encryptionDisabled": false
+            },
+            "secondaryArtifacts": [],
+            "cache": {
+                "type": "NO_CACHE"
+            },
+            "environment": {
+                "type": "LINUX_CONTAINER",
+                "image": "aws/codebuild/amazonlinux2-x86_64-standard:3.0",
+                "computeType": "BUILD_GENERAL1_LARGE",
+                "environmentVariables": [],
+                "privilegedMode": false,
+                "imagePullCredentialsType": "CODEBUILD"
+            },
+            "serviceRole": "arn:aws:iam::647020915193:role/service-role/codebuild-helloworldapp-service-role",
+            "timeoutInMinutes": 60,
+            "queuedTimeoutInMinutes": 480,
+            "encryptionKey": "arn:aws:kms:us-east-2:647020915193:alias/aws/s3",
+            "tags": [],
+            "created": 1601029402.764,
+            "lastModified": 1601374348.185,
+            "badge": {
+                "badgeEnabled": false
+            },
+            "logsConfig": {
+                "cloudWatchLogs": {
+                    "status": "ENABLED"
+                },
+                "s3Logs": {
+                    "status": "DISABLED",
+                    "encryptionDisabled": false
+                }
+            },
+            "fileSystemLocations": []
+        }
+    ],
+    "projectsNotFound": []
+}
