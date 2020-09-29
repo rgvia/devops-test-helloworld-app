@@ -1,0 +1,113 @@
+{
+    "pipeline": {
+        "name": "helloworldapp",
+        "roleArn": "arn:aws:iam::647020915193:role/service-role/AWSCodePipelineServiceRole-us-east-2-helloworldapp",
+        "artifactStore": {
+            "type": "S3",
+            "location": "codepipeline-us-east-2-968753737746"
+        },
+        "stages": [
+            {
+                "name": "Source",
+                "actions": [
+                    {
+                        "name": "Source",
+                        "actionTypeId": {
+                            "category": "Source",
+                            "owner": "ThirdParty",
+                            "provider": "GitHub",
+                            "version": "1"
+                        },
+                        "runOrder": 1,
+                        "configuration": {
+                            "Branch": "master",
+                            "OAuthToken": "****",
+                            "Owner": "rgvia",
+                            "PollForSourceChanges": "false",
+                            "Repo": "devops-test-helloworld-app"
+                        },
+                        "outputArtifacts": [
+                            {
+                                "name": "SourceArtifact"
+                            }
+                        ],
+                        "inputArtifacts": [],
+                        "region": "us-east-2",
+                        "namespace": "SourceVariables"
+                    }
+                ]
+            },
+            {
+                "name": "Build",
+                "actions": [
+                    {
+                        "name": "Build",
+                        "actionTypeId": {
+                            "category": "Build",
+                            "owner": "AWS",
+                            "provider": "CodeBuild",
+                            "version": "1"
+                        },
+                        "runOrder": 1,
+                        "configuration": {
+                            "ProjectName": "helloworldapp"
+                        },
+                        "outputArtifacts": [
+                            {
+                                "name": "BuildArtifact"
+                            }
+                        ],
+                        "inputArtifacts": [
+                            {
+                                "name": "SourceArtifact"
+                            }
+                        ],
+                        "region": "us-east-2",
+                        "namespace": "BuildVariables"
+                    }
+                ]
+            },
+            {
+                "name": "Deploy-Prod",
+                "actions": [
+                    {
+                        "name": "Manual_approval-Prod",
+                        "actionTypeId": {
+                            "category": "Approval",
+                            "owner": "AWS",
+                            "provider": "Manual",
+                            "version": "1"
+                        },
+                        "runOrder": 1,
+                        "configuration": {},
+                        "outputArtifacts": [],
+                        "inputArtifacts": [],
+                        "region": "us-east-2"
+                    },
+                    {
+                        "name": "Deploy-Prod",
+                        "actionTypeId": {
+                            "category": "Deploy",
+                            "owner": "AWS",
+                            "provider": "ElasticBeanstalk",
+                            "version": "1"
+                        },
+                        "runOrder": 2,
+                        "configuration": {
+                            "ApplicationName": "helloworld-prod",
+                            "EnvironmentName": "HelloworldProd-env"
+                        },
+                        "outputArtifacts": [],
+                        "inputArtifacts": [
+                            {
+                                "name": "BuildArtifact"
+                            }
+                        ],
+                        "region": "us-east-2"
+                    }
+                ]
+            }
+        ],
+        "version": 5
+    }
+}
