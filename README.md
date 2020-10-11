@@ -36,6 +36,7 @@ Note: Application will run in the 80 port.
 
 
 # REST API
+This application provides a REST API for get users info.
 
 ## Health Check
 * **URL:**`/actuator/health`
@@ -44,8 +45,6 @@ Note: Application will run in the 80 port.
 ```json
 {"status":"UP"}
 ```
-
-This application provides a REST API for get users info.
 
 ## Get User
 * **URL:**`/users/{userId}`
