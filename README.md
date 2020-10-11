@@ -32,7 +32,9 @@ eb init
 eb create devops-test-helloworld-app --cfg ApphelloworldProd-environment-config
 ```
 
-Note: Application will run in the 80 port.
+Notes:
+  - Application will run in the 80 port.
+  - The deployment will take about 15 minutes. The EB CLI timed out after 10 minutes. The operation might still be running. To keep viewing events, run 'eb events -f'. To set timeout duration, use '--timeout MINUTES'.
 
 
 # REST API
