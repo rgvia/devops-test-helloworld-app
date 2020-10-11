@@ -5,9 +5,9 @@ This folder contains the files to deploy the devops-test-helloworld-app applicat
 
 # Prerequisites:
 
-* AWS CLI version 2 installed and configured for eu-west-3 (Paris). (`https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html`)
+* AWS CLI version 2 installed and configured for eu-west-3 (Paris). (https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
 
-* EB CLI installed. (`https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb-cli3-install.html`)
+* EB CLI installed. (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb-cli3-install.html)
 
 
 # Deployment:
